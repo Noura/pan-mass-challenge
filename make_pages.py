@@ -3,7 +3,7 @@ import os, os.path, shutil, codecs, sys
 
 import jinja2
 
-TARGET = 'to-deploy'
+TARGET = 'to-deploy/'
 
 def main():
     here = os.path.dirname(__file__)

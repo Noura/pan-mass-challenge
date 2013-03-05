@@ -12,12 +12,17 @@
     color: white;
     font-weight:500;
 }
-.carousel-photo {
-    width: 100%;
-    height: auto;
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-.carousel-caption {
-    background: rgba(100,50,0,0.5);
+.snapshot {
+    width: 12em;
+}
+.bikes  {
+    width: 85%;
+    padding: 1em 0;
 }
 .my-button {
     width: 100%;
@@ -34,6 +39,7 @@
 .my-button:hover {
     color: rgb(255, 255, 255);
 }
+
 
 /* FRACTIONS - relative box sizing as an alternative to bootstrap spans */
 [class*="fraction"] {
