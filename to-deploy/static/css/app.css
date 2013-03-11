@@ -1,16 +1,6 @@
-.container {
+.container-fluid {
     padding-bottom:2em;
     padding-top: 1.5em;
-}
-.my-title {
-    width:98%;
-    padding:.3em 2% .3em 0;
-    margin: .25em 0;
-    font-size:250%;
-    line-height:1em;
-    background: rgb(255, 145, 0);
-    color: white;
-    font-weight:500;
 }
 .center {
     display: block;
@@ -18,26 +8,46 @@
     margin-right: auto;
 }
 .snapshot {
-    width: 12em;
+    max-width: 20em;
+    max-height: 20em;
+    padding: 1em;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.photo-img {
+    max-height: 18em;
+    max-width: 20em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.snapshot, .photo-img {
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+}
+.caption {
+    height: 2em;
+    text-align: center;
 }
 .bikes  {
     width: 85%;
     padding: 1em 0;
 }
-.my-button {
-    width: 100%;
-    padding: 1em 0;
-    color: inherit;
-    text-align: center;
-    display: block;
-    background: rgb(255, 145, 0);
-    color: rgb(250, 250, 250);
-    font-weight: 200;
-    font-size: 110%;
-    letter-spacing: .1em;
-}
 .my-button:hover {
     color: rgb(255, 255, 255);
+}
+.add-photo {
+    margin-top:2.5em;
+}
+.nav-pills>li>a {
+    background-color: rgb(235, 235, 255);
+}
+.nav-pills>li.external-link>a {
+    background-color: rgb(250, 250, 250);
+}
+i.icon-share-alt {
+    float:right;
 }
 
 
