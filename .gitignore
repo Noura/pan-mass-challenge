@@ -1,2 +1,5 @@
 .DS_Store
 to-deploy/*
+secret_constants.py
+*.pyc
+1.jpg

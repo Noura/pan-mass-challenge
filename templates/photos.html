@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block body %}
+
+{% macro form_field(name, id, help_text) %}
+    <div class="control-group {% if errors[name]  %} error {% endif %}">
+        <label class="control-label" for="{{id}}">
+            {{help_text}}
+            {% if errors[name] %}
+                <br/>
+                <span class="error-msg" for="{{id}}">
+                    {% if name == 'password' %}
+                        Incorrect password
+                    {% else %}
+                        Required
+                    {% endif %}
+                </span>
+            {% endif %}
+        </label>
+        <div class="controls">
+            {{ caller() }}
+        </div>
+    </div>
+{% endmacro %}
+
+<h1>Who We Ride For</h1>
+
+<div class="row-fluid">
+    <div class="span12">
+        {% for photo in photos %}
+            <div class="snapshot" data-pid="{{photo._id}}">
+                <div class="photo">
+                    <img class="photo-img" src="/{{prefix}}/{{photo.filename}}">
+                </div>
+                <div class="caption">
+                    {{photo.caption}}
+                </div>
+            </div> 
+            <div class="snapshot-detail hide" data-pid="{{photo._id}}">
+                <div class="photo">
+                    <img class="photo-img" src="/{{prefix}}/{{photo.filename}}">
+                </div>
+                <p class="caption">
+                    {{photo.caption}}
+                </p>
+                <p class="desc">
+                    {{photo.desc}}
+                </p>
+                <p class="user">
+                    &nbsp;
+                    <span class="pull-right">
+                        <em>&mdash;&nbsp;{{photo.user}}</em>
+                    </span>
+                </p>
+                {% if admin %}
+                    <form class="remove-photo form-horizontal well" action="/admin/" method="POST" enctype="multipart/form-data">
+                        <div class="alert">
+                            <strong>Warning!</strong>&nbsp;Once you delete a photo, that data is gone forever.  No backups, nothing.  You should really only be doing this if you are Nick Durbin, or if he has given you explicit permission.
+                        </div>
+
+                        {% call form_field('admin_password', 'input-admin-password', 'Admin password') %}
+                            <input type="password" name="admin_password" id="input-admin-password" placeholder="Admin password" class="wide">
+                        {% endcall %}
+                        
+                        {% call form_field('pid', 'input-pid', 'The mongo DB photo ID') %}
+                            <input type="text" name="pid" id="input-pid" value="{{photo._id}}">
+                        {% endcall %}
+                        <div>
+                            &nbsp;
+                            <input type="submit" class="btn btn-danger btn-small pull-right" value="Permanently Delete this Photo">
+                        </div>
+
+                    </form> 
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if not admin %}
+    <div class="row-fluid">
+        <div class="span12">
+            <a class="btn btn-primary" data-toggle="modal" href="#add-photo-modal">Upload a Photo</a>
+        </div>
+    </div>
+{% endif %}
+
+<div id="add-photo-modal" class="modal fade add-photo {% if not errors %}hide{% endif %}">
+    <form class="form-horizontal add-photo" action="/photos/" method="POST" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3>Share a Photo</h3>
+        </div>
+        <div class="modal-body">
+
+            {% call form_field('file', 'input-file', 'Upload photo') %}
+                <input type="file" name="file" id="input-file" class="wide">
+            {% endcall %}
+
+            {% call form_field('caption', 'input-caption', 'Who is in the photo?') %}
+                <input type="text" name="caption" id="input-caption" placeholder="Photo caption" class="wide">
+            {% endcall %}
+
+            {% call form_field('desc', 'input-desc', 'Share more about the significance of this photo') %}
+                <textarea type="text" name="desc" id="input-desc" placeholder="Description" class="wide"></textarea>
+            {% endcall %}
+
+            {% call form_field('user', 'input-user', 'Your name') %}
+                <input type="text" name="user" id="input-user" placeholder="Your name" class="wide">
+            {% endcall %}
+
+            {% call form_field('password', 'input-password', 'Password') %}
+                <input type="password" name="password" id="input-password" placeholder="Password" class="wide">
+            {% endcall %}
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cancel</button>
+            <input type="submit" class="btn btn-primary" value="Share">
+        </div>
+    </form>
+</div>
+
+
+{% endblock body %}
+
+{% block js %}
+
+<script type="text/javascript">
+    var values = {{values_json|safe}};
+    {% if values or errors %}
+        $('#add-photo-modal').modal();
+    {% endif %}
+</script>
+<script type="text/javascript" src="/static/js/photos.js"></script>
+
+{% endblock js %}
