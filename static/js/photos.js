@@ -14,4 +14,13 @@ $(document).ready(function(){
         $('.snapshot-detail[data-pid="'+pid+'"]').removeClass('hide');
         $('#shadow').removeClass('hide').height($(document).height());
     });
+    $('input[type=text],input[type=password]').on('keydown', function(ev) {
+        if (ev.which == 13) {
+            console.log('got enter key', ev);
+            ev.preventDefault();
+            ev.stopPropagation();
+            $('input[type=submit]').trigger('click');
+        }
+    });
+
 });

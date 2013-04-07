@@ -1,3 +1,22 @@
+#shadow {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.snapshot-detail {
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    left: 10%;
+    width: 80%;
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    background: rgb(250, 250, 250);
+}
 .container-fluid {
     padding-bottom:2em;
     padding-top: 1.5em;
@@ -29,6 +48,7 @@
 .caption {
     height: 2em;
     text-align: center;
+    padding-top: 5px;
 }
 .bikes  {
     width: 85%;
@@ -37,8 +57,11 @@
 .my-button:hover {
     color: rgb(255, 255, 255);
 }
-.add-photo {
-    margin-top:2.5em;
+form.add-photo {
+    margin: 0;
+}
+.wide {
+    width: 90%;
 }
 .nav-pills>li>a {
     background-color: rgb(235, 235, 255);
@@ -49,7 +72,21 @@
 i.icon-share {
     float:right;
 }
-
+.error-msg {
+    color: #b94a48;
+    font-weight: 800;
+}
+.my-divider {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+#pmclogo {
+    width: 25px;
+}
+.external-link-header {
+    color: rgb(200, 75, 75);
+}
 
 /* FRACTIONS - relative box sizing as an alternative to bootstrap spans */
 [class*="fraction"] {

@@ -41,6 +41,7 @@ def photos(admin=False):
         'values': {},
         'admin': admin,
     }
+    # adding a photo
     if request.method == 'POST' and not admin:
         password = request.form.get('password', None)
         f = request.files.get('file', None)
@@ -68,6 +69,7 @@ def photos(admin=False):
             f.save(os.path.join(THIS_DIR, PHOTOS_DIR, filename))
             db.add_photo(filename, caption, user, desc)
 
+    # showing the page of photos
     ctx['photos'] = db.get_photos()
     ctx['prefix'] = PHOTOS_DIR
     ctx['values_json'] = json.dumps(ctx['values'])
@@ -75,12 +77,15 @@ def photos(admin=False):
 
 @app.route('/admin/', methods=['GET', 'POST'])
 def photos_admin():
+    # deleting a photo
     if request.method == 'POST':
         password = request.form.get('admin_password', None)
         pid = request.form.get('pid', None)
         if password == ADMIN_PASSWORD and pid:
             db.delete_photo(pid)
             #TODO delete photo file
+
+    # showing admin page of photos
     return photos(True)
    
 

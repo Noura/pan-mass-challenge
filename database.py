@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 def get_database():
     mongo = getattr(MongoClient('localhost', 27017), 'panmass')
@@ -17,7 +18,7 @@ class DB(object):
         })
 
     def delete_photo(self, pid):
-        self.mongo.photos.remove({'_id':pid})
+        self.mongo.photos.remove({'_id':ObjectId(pid)})
 
     def get_photos(self):
         return self.mongo.photos.find()
